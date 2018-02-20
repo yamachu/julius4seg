@@ -34,6 +34,9 @@ sp_remover.MARGIN = 5
 を好みで変更すること．
 ここでは無音区間と判定された最初のフレームの初めの5msec後と，無音区間と判定された最後のフレームの終わりから5msec前までを削除するよう指定している．
 
+![実行結果](https://github.com/yamachu/julius4seg/raw/master/sample/result.png "サンプル")
+
+
 ## その他
 
 サンプルのテキストは[日本声優統計学会](http://voice-statistics.github.io/)より，[声優統計コーパス 音素バランス文](https://github.com/voice-statistics/voice-statistics.github.com/blob/master/assets/doc/balance_sentences.txt)の001をお借りいたしました．
