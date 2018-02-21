@@ -430,7 +430,7 @@ def gen_julius_aliment_dfa() -> str:
     ]) + '\n'
 
 
-def julius_sp_insert(target_wav_file: str, aliment_file_signiture: str, model_path: str = None) -> str:
+def julius_sp_insert(target_wav_file: str, aliment_file_signiture: str, model_path: str = None) -> [str]:
     julius_args = {
         '-h': str(
             JULIUS_ROOT / 'model' / 'phone_m' / 'jnas-mono-16mix-gid.binhmm'
@@ -487,7 +487,7 @@ def get_sp_inserterd_phone_seqence(raw_output: str, debug_symbol='') -> str:
     return ' '.join([s.strip() for s in tmp.split('|')])
 
 
-def julius_phone_alignment(target_wav_file: str, aliment_file_signiture: str, model_path: str = None) -> str:
+def julius_phone_alignment(target_wav_file: str, aliment_file_signiture: str, model_path: str = None) -> [str]:
     julius_args = {
         '-h': str(
             JULIUS_ROOT / 'model' / 'phone_m' / 'jnas-mono-16mix-gid.binhmm'
