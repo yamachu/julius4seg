@@ -33,7 +33,17 @@ sp_inserter.JULIUS_ROOT = PurePath('/Users/yamachu/tmp/dictation-kit')
 
 ### 実行例
 
-`python3 run_remover.py sample_voice.wav seg.txt out.wav`
+全ての無音データを削除する場合
+
+```
+python3 run_remover.py sample_voice.wav seg.txt out.wav
+```
+
+音声の先頭と終端の無音区間のトリミングを行う場合（例では500msecに揃える）
+
+```
+python3 run_remover.py sample_voice.wav seg.txt out.wav -s 500 -e 500 -E
+```
 
 ### 注意事項
 
