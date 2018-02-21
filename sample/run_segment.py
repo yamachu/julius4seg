@@ -19,15 +19,20 @@ sp_inserter.JULIUS_ROOT = PurePath('/Users/yamachu/tmp/dictation-kit')
 def main(args: dict):
     utt_id = PurePath(args.wav_file).name.split('.')[0]
 
-    with open(args.input_text_file) as f:
-        base_kan_text = f.readline().strip()
-
     with open(args.input_kana_file) as f:
         base_kata_text = f.readline().strip()
+
+    if args.input_text_file:
+        with open(args.input_text_file) as f:
+            base_kan_text = f.readline().strip().split()
+    else:
+        base_kan_text = ['sym_{}'.format(i) for i in range(len(base_kata_text.split()))]
+
+    assert len(base_kan_text) == len(base_kata_text.split())
     
     julius_phones = [sp_inserter.conv2julius(hira) for hira in [sp_inserter.kata2hira(kata) for kata in base_kata_text.split()]]
     
-    dict_1st = sp_inserter.gen_julius_dict_1st(base_kan_text.split(), julius_phones)
+    dict_1st = sp_inserter.gen_julius_dict_1st(base_kan_text, julius_phones)
     dfa_1st = sp_inserter.gen_julius_dfa(dict_1st.count('\n'))
     
     with open('first_pass.dict', 'w') as f:
@@ -44,7 +49,7 @@ def main(args: dict):
     try:
         _, sp_position = sp_inserter.get_sp_inserted_text(raw_first_output, utt_id)
         
-        for j, zipped in enumerate(zip(base_kan_text.split(), julius_phones)):
+        for j, zipped in enumerate(zip(base_kan_text, julius_phones)):
             forced_text_with_sp.append(zipped[0])
             forced_phones_with_sp.append(zipped[1])
             if j in sp_position:
@@ -74,8 +79,9 @@ def main(args: dict):
 
     time_alimented_list = sp_inserter.get_time_alimented_list(raw_second_output)
 
-    with open(args.output_text_file, 'w') as f:
-        f.write(forced_text_with_sp + '\n')
+    if args.output_text_file:
+        with open(args.output_text_file, 'w') as f:
+            f.write(forced_text_with_sp + '\n')
 
     with open(args.output_seg_file, 'w') as f:
         for ss in time_alimented_list:
@@ -85,11 +91,13 @@ def main(args: dict):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser('sp insert demo by Julius')
     
-    parser.add_argument('wav_file')
-    parser.add_argument('input_text_file')
-    parser.add_argument('input_kana_file')
-    parser.add_argument('output_text_file')
-    parser.add_argument('output_seg_file')
+    parser.add_argument('wav_file', help='入力音声')
+    parser.add_argument('input_kana_file', help='スペース区切りのカナ読みファイル')
+    parser.add_argument('output_seg_file', help='時間情報付き音素セグメントファイル')
+
+    parser.add_argument('-it','--input_text_file', help='漢字仮名交じり文')
+    parser.add_argument('-ot', '--output_text_file', help='漢字仮名交じり文にspを挿入したもの')
+    
     parser.add_argument('--hmm_model', help='support mono-phone model only')
 
     args = parser.parse_args()

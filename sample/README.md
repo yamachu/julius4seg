@@ -4,7 +4,17 @@
 
 ### 実行例
 
-`python3 run_segment.py sample_voice.wav sample_kan.txt sample_kana.txt sp_kan.txt seg.txt`
+spを挿入したテキストが必要な場合（spを考慮した言語モデルの作成などの用途）
+
+```
+python3 run_segment.py sample_voice.wav -it sample_kan.txt -ot sp_kan.txt sample_kana.txt seg.txt
+```
+
+音素のセグメントのみが必要な場合（主に合成などで無音区間を除去したい場合など）
+
+```
+python3 run_segment.py sample_voice.wav sample_kana.txt seg.txt
+```
 
 ### 注意事項
 
