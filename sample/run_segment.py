@@ -12,7 +12,6 @@ sp_inserter.JULIUS_ROOT = PurePath('/Users/yamachu/tmp/dictation-kit')
 # If you want to handle error, uncomment-out
 # fhandler = FileHandler(logname + '.log')
 # fhandler.setLevel(DEBUG)
-# logger.addHandler(fhandler)
 # sp_inserter.logger.addHandler(fhandler)
 
 
