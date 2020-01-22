@@ -19,9 +19,7 @@ RUN git clone https://github.com/julius-speech/dictation-kit.git /opt/dictation-
     git lfs checkout origin "model/phone_m/jnas-mono-16mix-gid*"
 
 RUN git clone https://github.com/yamachu/julius4seg.git /opt/julius4seg && \
-    cd /opt/julius4seg && \
-    git checkout misc/support-docker && \
-    cd sample && \
+    cd /opt/julius4seg/sample && \
     chmod +x ./run.sh
 
 WORKDIR /opt/julius4seg/sample
