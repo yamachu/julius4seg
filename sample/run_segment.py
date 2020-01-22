@@ -7,7 +7,7 @@ import argparse
 from logging import DEBUG, FileHandler
 
 # MUST CHANGE YOUR JULIUS DICTATION-KIT PATH
-sp_inserter.JULIUS_ROOT = PurePath('/Users/yamachu/tmp/dictation-kit')
+sp_inserter.JULIUS_ROOT = PurePath('/opt/dictation-kit')
 
 # If you want to handle error, uncomment-out
 # fhandler = FileHandler(logname + '.log')
