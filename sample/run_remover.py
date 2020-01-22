@@ -7,10 +7,8 @@ import argparse
 import wave
 
 
-sp_remover.MARGIN = 5
-
-
 def main(args: dict):
+    sp_remover.MARGIN = int(args.margin)
     with open(args.input_seg_file) as f:
         label = [s.strip() for s in f]
     
@@ -34,6 +32,7 @@ if __name__ == '__main__':
     parser.add_argument('-s', '--start', default=0, help='発話始点の残す無音区間の量[msec]: -Eの時のみ有効')
     parser.add_argument('-e', '--end', default=0, help='発話終端の残す無音区間の量[msec]: -Eの時のみ有効')
     parser.add_argument('-E', '--edge-only', action='store_true', help='発話の前後の無音区間のみを行う')
+    parser.add_argument('-m', '--margin', default=5,  help='有声区間と無声区間のマージン[msec]')
 
     args = parser.parse_args()
 
