@@ -123,14 +123,7 @@ python3 run_remover.py sample_voice.wav seg.txt out.wav
 python3 run_remover.py sample_voice.wav seg.txt out.wav -s 500 -e 500 -E
 ```
 
-### 注意事項
-
-_run_remover.py_ 内の
-```
-sp_remover.MARGIN = 5
-```
-を好みで変更すること．
-ここでは無音区間と判定された最初のフレームの初めの5msec後と，無音区間と判定された最後のフレームの終わりから5msec前までを削除するよう指定している．
+また無音区間と判定された最初のフレームの初めから、また最後のフレームの終わりからn[msec]を削除できる `m` オプションを使用できる．
 
 ![実行結果](https://github.com/yamachu/julius4seg/raw/master/sample/result.png "サンプル")
 
